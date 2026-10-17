@@ -24,10 +24,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Anton&family=Familjen+Grotesk:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Anton&family=Familjen+Grotesk:wght@400;500;600&family=Lalezar&family=Readex+Pro:wght@400;500;600;700&display=swap"
         />
       </head>
-      <body>{children}</body>
+      {/* Browser extensions (e.g. ColorZilla) add attributes to <body> before React loads */}
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

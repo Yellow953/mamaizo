@@ -15,12 +15,15 @@ function CameraRig() {
   return null;
 }
 
-// Procedural studio: dark room with soft boxes, so the steel gets crisp highlights.
+// Procedural studio: warm room with soft boxes and a couple of dark flags,
+// so the steel reads bright like the cream page but keeps crisp contrast.
 function Studio() {
   const accent = useCssVar("--accent", "#C0391B");
   return (
     <Environment resolution={256} frames={1} key={accent}>
-      <color attach="background" args={["#2e211b"]} />
+      <color attach="background" args={["#5e4a3e"]} />
+      <Lightformer form="rect" intensity={1} color="#1c0f0a" position={[-3, 0.5, -4]} scale={[1.6, 8, 1]} />
+      <Lightformer form="rect" intensity={1} color="#1c0f0a" position={[3.5, 0, 4]} rotation-y={Math.PI} scale={[1.2, 8, 1]} />
       <Lightformer form="rect" intensity={4} color="#fff4e6" position={[0, 5, -1]} rotation-x={Math.PI / 2} scale={[10, 3, 1]} />
       <Lightformer form="rect" intensity={2} color="#ffffff" position={[-5, 1, 1]} rotation-y={Math.PI / 2} scale={[8, 1.4, 1]} />
       <Lightformer form="rect" intensity={1.4} color="#fff1e0" position={[5, 0.5, -1]} rotation-y={-Math.PI / 2} scale={[8, 0.8, 1]} />

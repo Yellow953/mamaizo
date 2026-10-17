@@ -1,6 +1,6 @@
 # MamaIzo showroom site
 
-Scroll-driven 3D showroom website for **MamaIzo** (Instagram: @mamaizocooks), a seller of stainless steel cookware. One 3D pot is the hero. Scrolling moves the camera and the pot through five scenes while giant headlines change behind it.
+Scroll-driven 3D showroom website for **MamaIzo** (Instagram: @mamaizocooks), a seller of stainless steel cookware. One 3D pot is the hero. Scrolling moves the camera and the pot through six scenes while giant headlines change behind it.
 
 Reference look: a product showroom where huge type sits behind a 3D product on a flat background, and the product tilts, travels and changes position as you scroll.
 
@@ -23,28 +23,33 @@ Reference look: a product showroom where huge type sits behind a 3D product on a
 - `components/Stage.tsx`: client wrapper that loads `Scene` with `dynamic(..., { ssr: false })`
 - `components/Scene.tsx`: `<Canvas>`, procedural `<Environment>` built from `Lightformer`s (no HDR download), `ContactShadows`, camera rig
 - `components/Pot.tsx`: parametric pot with `variant` of `main`, `left` or `right`. Lathe-geometry body and lid, torus handles, black knob, steam as `<points>`
-- `components/Overlay.tsx`: headlines, callouts, CTA, progress bar, all updated each frame from scroll progress
+- `components/Overlay.tsx`: headlines (filled behind the pot, plus an outline copy in front so they read across it), spinning hero badge, callouts, CTA, and the bottom scene index (click to jump, via `progress.scrollTo`), all updated each frame from scroll progress
 - `components/ScrollDriver.tsx`: Lenis wired into ScrollTrigger, writes `progress.target`, eases `progress.current`
 - `lib/progress.ts`: shared scroll store plus the keyframe arrays and the `at()` interpolator
 - `lib/content.ts`: all copy and `WHATSAPP_URL`
+- `app/design2/`: second design ("Tartan"), Arabic and RTL. `layout.tsx` (nav + footer), home, `shop/`, `shop/[slug]/` (product page), `contact/`. Copy lives in `tartan` in `lib/content.ts`; products are `tartan.products`
+- `components/design2/`: `Nav` (client, highlights the current page), `ProductCard`, `ContactForm` (client, turns the form into a prefilled WhatsApp message, no backend)
+- `lib/whatsapp.ts`: `waLink(text)` builds WhatsApp links with a prefilled message
+- `public/images/showroom/mamaizo.jpg`: her portrait for the showroom, cropped from `design2/team.jpg`
+- `public/images/design2/`: photos from her Instagram (reel covers, placeholders until she sends originals)
 
 ## How the scroll works
 
-`#spacer` is 560vh tall. ScrollTrigger maps scrolling through it to `progress.target` (0 to 1). `progress.current` eases toward it. Everything reads `t = progress.current * 4`, then `at(array, t)` interpolates between five keyframes with smoothstep.
+`#spacer` is 670vh tall. ScrollTrigger maps scrolling through it to `progress.target` (0 to 1). `progress.current` eases toward it. Everything reads `t = progress.current * 5`, then `at(array, t)` interpolates between six keyframes with smoothstep.
 
-Scenes: 0 hero, 1 cook slow, 2 lift the lid, 3 the range, 4 order.
+Scenes: 0 hero, 1 cook slow, 2 lift the lid, 3 the range, 4 meet her (her photo, pot on the left), 5 order.
 
 Keyframes in `lib/progress.ts` (one value per scene):
 
 | Key | Values |
 |---|---|
-| `ry` pot rotation Y | 0.5, 2.9, 3.7, 5.2, 6.78 |
-| `rx` pot tilt X | 0.1, 0.28, 0.38, 0.12, 0.08 |
-| `px` pot x offset | 0, 0.95, 0, 0, 0 |
-| `sc` pot scale | 1.45, 1.4, 1.5, 1.05, 1.35 |
-| `lift` lid lift | 0, 0, 1, 0, 0 |
-| `cy` camera y | 0, 0.15, 1.1, 0.2, 0 |
-| `rng` side pots visible | 0, 0, 0, 1, 0 |
+| `ry` pot rotation Y | 0.5, 2.9, 3.7, 5.2, 6.1, 6.78 |
+| `rx` pot tilt X | 0.1, 0.28, 0.38, 0.12, 0.16, 0.08 |
+| `px` pot x offset | 0, 0.95, 0, 0, -1.05, 0 |
+| `sc` pot scale | 1.45, 1.4, 1.5, 1.05, 1.15, 1.35 |
+| `lift` lid lift | 0, 0, 1, 0, 0, 0 |
+| `cy` camera y | 0, 0.15, 1.1, 0.2, 0.1, 0 |
+| `rng` side pots visible | 0, 0, 0, 1, 0, 0 |
 
 Extras: the pot follows the mouse slightly (`state.pointer`). On narrow screens (under 700px) the pot is scaled down and centered.
 
@@ -60,11 +65,12 @@ Palette comes from the MamaIzo Instagram feed. Never go back to black and green.
 | `--blue` | `#2C5AA0` floral blue | `#8FB3E3` |
 | `--muted` | `#7A5A49` | `#C4A58F` |
 
-- Define every color as a CSS variable. Light values on `:root`, dark values under `prefers-color-scheme: dark`.
+- Define every color as a CSS variable on `:root`. The site is light mode only (no dark-mode overrides).
 - Giant condensed headlines (Anton) in the accent color sit behind the pot. Keep the page otherwise quiet.
 - Motion is scroll-driven only. Respect `prefers-reduced-motion` (Lenis is skipped, progress is not eased).
 - Must work at phone width (about 400px) with no horizontal scroll. Keep safe-area insets on fixed elements.
 - Keep focus states visible on links and buttons.
+- Never show prices anywhere on the site. Orders and pricing go through WhatsApp.
 
 ## 3D rules
 
@@ -78,7 +84,7 @@ Palette comes from the MamaIzo Instagram feed. Never go back to black and green.
 
 - Set the WhatsApp number in `lib/content.ts` (`WHATSAPP_URL`, format `https://wa.me/961XXXXXXXX`)
 - Replace placeholder copy in `lib/content.ts` with the client's real text (English and Arabic are both likely needed; Arabic means RTL layout and an Arabic display font)
-- Add the real product list, prices and photos
+- Add the real product list and photos (no prices)
 - Try replacing the code-built pot with a model generated from her pot photos (Higgsfield image-to-3D)
 - Add a product lineup section where clicking a pot flies the camera to it
 - Add a recipes or Instagram section and a real footer

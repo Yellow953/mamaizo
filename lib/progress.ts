@@ -3,19 +3,21 @@ export const progress = {
   target: 0,
   current: 0,
   reduced: false,
+  // Scrolls the page to y px. ScrollDriver swaps in Lenis when smooth scroll is on.
+  scrollTo: (y: number) => window.scrollTo(0, y),
 };
 
-export const SCENE_COUNT = 5;
+export const SCENE_COUNT = 6;
 
-// One value per scene: 0 hero, 1 cook slow, 2 lift the lid, 3 the range, 4 order.
+// One value per scene: 0 hero, 1 cook slow, 2 lift the lid, 3 the range, 4 meet her, 5 order.
 export const K = {
-  ry: [0.5, 2.9, 3.7, 5.2, 6.78], // pot rotation Y
-  rx: [0.1, 0.28, 0.38, 0.12, 0.08], // pot tilt X
-  px: [0, 0.95, 0, 0, 0], // pot x offset
-  sc: [1.45, 1.4, 1.5, 1.05, 1.35], // pot scale
-  lift: [0, 0, 1, 0, 0], // lid lift
-  cy: [0, 0.15, 1.1, 0.2, 0], // camera y
-  rng: [0, 0, 0, 1, 0], // side pots visible
+  ry: [0.5, 2.9, 3.7, 5.2, 6.1, 6.78], // pot rotation Y
+  rx: [0.1, 0.28, 0.38, 0.12, 0.16, 0.08], // pot tilt X
+  px: [0, 0.95, 0, 0, -1.05, 0], // pot x offset
+  sc: [1.45, 1.4, 1.5, 1.05, 1.15, 1.35], // pot scale
+  lift: [0, 0, 1, 0, 0, 0], // lid lift
+  cy: [0, 0.15, 1.1, 0.2, 0.1, 0], // camera y
+  rng: [0, 0, 0, 1, 0, 0], // side pots visible
 };
 
 export const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v));
@@ -32,3 +34,10 @@ export function at(arr: number[], t: number) {
 export const weight = (i: number, t: number) => clamp(1 - Math.abs(t - i) * 1.8);
 
 export const sceneTime = () => progress.current * (SCENE_COUNT - 1);
+
+// Page scroll position (px) where scene i sits.
+export const sceneScrollY = (i: number) => {
+  const spacer = document.getElementById("spacer");
+  const range = (spacer?.offsetHeight ?? 0) - window.innerHeight;
+  return (spacer?.offsetTop ?? 0) + (range * i) / (SCENE_COUNT - 1);
+};

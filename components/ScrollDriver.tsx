@@ -14,6 +14,7 @@ export default function ScrollDriver() {
 
     const lenis = reduced ? null : new Lenis();
     lenis?.on("scroll", ScrollTrigger.update);
+    if (lenis) progress.scrollTo = (y) => lenis.scrollTo(y, { duration: 1.4 });
 
     const st = ScrollTrigger.create({
       trigger: "#spacer",
