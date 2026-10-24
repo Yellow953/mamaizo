@@ -117,6 +117,8 @@ export const tartan = {
     team: "انضمّي لفريقي",
     contact: "تواصلي معي",
     session: "احجزي جلسة مجانية",
+    menu: "القائمة",
+    close: "سكّري",
   },
   hero: {
     badge: "ملكة AMC ٢٠٢٣ – ٢٠٢٥",
