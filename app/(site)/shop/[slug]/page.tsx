@@ -6,18 +6,19 @@ import { Suspense } from "react";
 import Motion from "@/components/Motion";
 import ProductCard from "@/components/ProductCard";
 import { tartan as c } from "@/lib/content";
+import { getProduct, getProducts } from "@/lib/data";
 import { external, waLink } from "@/lib/whatsapp";
-
-const find = (slug: string) => c.products.find((p) => p.slug === slug);
 
 type Params = PageProps<"/shop/[slug]">["params"];
 
-export function generateStaticParams() {
-  return c.products.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const slugs = (await getProducts()).map((p) => ({ slug: p.slug }));
+  // Cache Components needs at least one param; products added later render on first visit
+  return slugs.length ? slugs : [{ slug: "everyday-pot" }];
 }
 
 export async function generateMetadata(props: PageProps<"/shop/[slug]">): Promise<Metadata> {
-  const p = find((await props.params).slug);
+  const p = await getProduct((await props.params).slug);
   return p ? { title: `${p.name} · ${c.name}`, description: p.text } : {};
 }
 
@@ -36,9 +37,9 @@ export default function Product(props: PageProps<"/shop/[slug]">) {
 }
 
 async function ProductDetail({ params }: { params: Params }) {
-  const p = find((await params).slug);
+  const p = await getProduct((await params).slug);
   if (!p) notFound();
-  const related = c.products.filter((r) => r.slug !== p.slug);
+  const related = (await getProducts()).filter((r) => r.slug !== p.slug);
 
   return (
     <Motion>

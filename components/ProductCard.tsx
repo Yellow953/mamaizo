@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { tartan as c } from "@/lib/content";
-
-type Product = (typeof c.products)[number];
+import type { Product } from "@/lib/types";
 
 export default function ProductCard({ product: p }: { product: Product }) {
   return (

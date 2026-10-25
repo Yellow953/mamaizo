@@ -1,30 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import FinderHeader from "@/components/FinderHeader";
 import RecipeCard from "@/components/RecipeCard";
 import { tartan } from "@/lib/content";
+import type { Recipe } from "@/lib/types";
 import { useGridEntrance } from "@/lib/motion";
 import { matches, normalize } from "@/lib/search";
 import { external, waLink } from "@/lib/whatsapp";
 
 const s = tartan.recipesPage;
-const recipes = tartan.recipes.items;
-const categories = [s.all, ...new Set(recipes.map((r) => r.category))].map((name) => ({
-  name,
-  count: name === s.all ? recipes.length : recipes.filter((r) => r.category === name).length,
-}));
 
-const haystacks = recipes.map((r) => normalize([r.name, r.category, r.description, ...r.ingredients, ...r.keywords].join(" ")));
+export default function RecipeSearch({ recipes }: { recipes: Recipe[] }) {
+  const categories = useMemo(
+    () =>
+      [s.all, ...new Set(recipes.map((r) => r.category))].map((name) => ({
+        name,
+        count: name === s.all ? recipes.length : recipes.filter((r) => r.category === name).length,
+      })),
+    [recipes],
+  );
 
-export default function RecipeSearch() {
+  const haystacks = useMemo(
+    () => recipes.map((r) => normalize([r.name, r.category, r.description, ...r.ingredients, ...r.keywords].join(" "))),
+    [recipes],
+  );
+
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(s.all);
 
   const shown = recipes.filter(
     (r, i) => (category === s.all || r.category === category) && matches(haystacks[i], query),
   );
-  const grid = useGridEntrance(shown.map((r) => r.name).join());
+  const grid = useGridEntrance(shown.map((r) => r.slug).join());
 
   return (
     <>
@@ -42,7 +50,7 @@ export default function RecipeSearch() {
         {shown.length > 0 ? (
           <div className="t-recipe-grid" ref={grid}>
             {shown.map((r) => (
-              <RecipeCard key={r.name} recipe={r} />
+              <RecipeCard key={r.slug} recipe={r} />
             ))}
           </div>
         ) : (

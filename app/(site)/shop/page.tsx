@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Motion from "@/components/Motion";
 import ShopFilter from "@/components/ShopFilter";
 import { tartan as c } from "@/lib/content";
+import { getProducts } from "@/lib/data";
 import { external, waLink } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
@@ -9,11 +10,13 @@ export const metadata: Metadata = {
   description: c.shop.meta.description,
 };
 
-export default function Shop() {
+export default async function Shop() {
+  const products = await getProducts();
+
   return (
     <main>
       <Motion>
-        <ShopFilter />
+        <ShopFilter products={products} />
 
         <section className="t-tartan t-session">
           <div className="t-session-inner" data-stagger>

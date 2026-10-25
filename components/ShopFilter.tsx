@@ -1,26 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import FinderHeader from "@/components/FinderHeader";
 import ProductCard from "@/components/ProductCard";
 import { tartan } from "@/lib/content";
+import type { Product } from "@/lib/types";
 import { useGridEntrance } from "@/lib/motion";
 import { matches, normalize } from "@/lib/search";
 import { external, waLink } from "@/lib/whatsapp";
 
 const s = tartan.shop;
-const products = tartan.products;
-const categories = [s.all, ...new Set(products.map((p) => p.category))].map((name) => ({
-  name,
-  count: name === s.all ? products.length : products.filter((p) => p.category === name).length,
-}));
 
-// Search covers everything written about a product, so "رز" finds the pot she cooks rice in
-const haystacks = products.map((p) =>
-  normalize([p.name, p.category, p.text, p.description, ...p.cooks, ...p.features].join(" ")),
-);
+export default function ShopFilter({ products }: { products: Product[] }) {
+  const categories = useMemo(
+    () =>
+      [s.all, ...new Set(products.map((p) => p.category))].map((name) => ({
+        name,
+        count: name === s.all ? products.length : products.filter((p) => p.category === name).length,
+      })),
+    [products],
+  );
 
-export default function ShopFilter() {
+  // Search covers everything written about a product, so "رز" finds the pot she cooks rice in
+  const haystacks = useMemo(
+    () => products.map((p) => normalize([p.name, p.category, p.text, p.description, ...p.cooks, ...p.features].join(" "))),
+    [products],
+  );
+
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(s.all);
 

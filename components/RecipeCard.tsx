@@ -4,9 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId, useRef } from "react";
 import { INSTAGRAM_URL, tartan as c } from "@/lib/content";
+import type { Recipe } from "@/lib/types";
 import { external, waLink } from "@/lib/whatsapp";
-
-type Recipe = (typeof c.recipes.items)[number];
 
 const m = c.recipes.modal;
 
@@ -30,7 +29,7 @@ export default function RecipeCard({ recipe: r }: { recipe: Recipe }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const close = () => dialog.current?.close();
-  // Falls back to the profile until the reel link is set in lib/content.ts
+  // Falls back to the profile until the reel link is set at /admin
   const instagram = r.instagram || INSTAGRAM_URL;
 
   return (

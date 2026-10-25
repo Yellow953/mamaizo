@@ -1,16 +1,11 @@
-import Link from "next/link";
-import { tartan as c } from "@/lib/content";
+import NotFoundContent from "@/components/NotFoundContent";
+import SiteChrome from "@/components/SiteChrome";
 
-export default function Design2NotFound() {
+// Unmatched URLs render outside the (site) layout, so this adds the site chrome itself
+export default function NotFound() {
   return (
-    <main className="t-page-head t-404">
-      <h1 className="t-display t-h1 t-h1--page">{c.notFound.title}</h1>
-      <p className="t-lead">{c.notFound.body}</p>
-      <div className="t-actions">
-        <Link className="t-btn t-btn--red" href="/shop">
-          {c.notFound.cta}
-        </Link>
-      </div>
-    </main>
+    <SiteChrome>
+      <NotFoundContent />
+    </SiteChrome>
   );
 }

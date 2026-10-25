@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// Product and recipe photos: anyone can view, only the admin account uploads (images under 5 MB).
+// The admin claim is set with scripts/set-admin.mjs.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{folder}/{file} {
+      allow read: if folder in ['products', 'recipes'];
+      allow write: if folder in ['products', 'recipes']
+        && request.auth != null
+        && request.auth.token.admin == true
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}

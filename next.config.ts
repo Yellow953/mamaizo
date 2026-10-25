@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // Hide the Next.js dev badge so client previews look clean
   devIndicators: false,
+  // Product and recipe photos uploaded at /admin
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "firebasestorage.googleapis.com" }],
+  },
   // The client reviewed this design at /design2 before it became the main site
   async redirects() {
     return [

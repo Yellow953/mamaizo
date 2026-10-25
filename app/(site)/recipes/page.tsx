@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Motion from "@/components/Motion";
 import RecipeSearch from "@/components/RecipeSearch";
 import { INSTAGRAM_URL, tartan as c } from "@/lib/content";
+import { getRecipes } from "@/lib/data";
 import { external } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
@@ -9,11 +10,13 @@ export const metadata: Metadata = {
   description: c.recipesPage.meta.description,
 };
 
-export default function Recipes() {
+export default async function Recipes() {
+  const recipes = await getRecipes();
+
   return (
     <main>
       <Motion>
-        <RecipeSearch />
+        <RecipeSearch recipes={recipes} />
 
         <section className="t-tartan t-session">
           <div className="t-session-inner" data-stagger>

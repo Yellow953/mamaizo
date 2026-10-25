@@ -5,6 +5,7 @@ import Motion from "@/components/Motion";
 import ProductCard from "@/components/ProductCard";
 import RecipeCard from "@/components/RecipeCard";
 import { tartan as c } from "@/lib/content";
+import { getProducts, getRecipes } from "@/lib/data";
 import { external, waLink } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
   description: c.meta.description,
 };
 
-export default function Tartan() {
+export default async function Tartan() {
+  const [products, recipes] = await Promise.all([getProducts(), getRecipes()]);
+
   return (
     <main>
       <Motion>
@@ -86,7 +89,7 @@ export default function Tartan() {
             </Link>
           </div>
           <div className="t-grid" data-stagger>
-            {c.products.map((p) => (
+            {products.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
@@ -100,8 +103,8 @@ export default function Tartan() {
             </Link>
           </div>
           <div className="t-grid t-grid--small" data-stagger>
-            {c.recipes.items.slice(0, 4).map((r) => (
-              <RecipeCard key={r.name} recipe={r} />
+            {recipes.slice(0, 4).map((r) => (
+              <RecipeCard key={r.slug} recipe={r} />
             ))}
           </div>
         </section>
