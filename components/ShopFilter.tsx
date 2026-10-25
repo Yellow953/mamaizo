@@ -4,6 +4,7 @@ import { useState } from "react";
 import FinderHeader from "@/components/FinderHeader";
 import ProductCard from "@/components/ProductCard";
 import { tartan } from "@/lib/content";
+import { useGridEntrance } from "@/lib/motion";
 import { matches, normalize } from "@/lib/search";
 import { external, waLink } from "@/lib/whatsapp";
 
@@ -27,6 +28,8 @@ export default function ShopFilter() {
     (p, i) => (category === s.all || p.category === category) && matches(haystacks[i], query),
   );
 
+  const grid = useGridEntrance(shown.map((p) => p.slug).join());
+
   return (
     <>
       <FinderHeader
@@ -41,7 +44,7 @@ export default function ShopFilter() {
 
       <section className="t-finder-results">
         {shown.length > 0 ? (
-          <div className="t-product-grid">
+          <div className="t-product-grid" ref={grid}>
             {shown.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}

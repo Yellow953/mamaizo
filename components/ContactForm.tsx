@@ -22,7 +22,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form className="t-form" onSubmit={onSubmit}>
+    <form className="t-form" onSubmit={onSubmit} data-stagger>
       <h2 className="t-display t-form-title">{f.title}</h2>
       <label>
         <span>{f.name}</span>

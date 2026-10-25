@@ -4,6 +4,7 @@ import { useState } from "react";
 import FinderHeader from "@/components/FinderHeader";
 import RecipeCard from "@/components/RecipeCard";
 import { tartan } from "@/lib/content";
+import { useGridEntrance } from "@/lib/motion";
 import { matches, normalize } from "@/lib/search";
 import { external, waLink } from "@/lib/whatsapp";
 
@@ -23,6 +24,7 @@ export default function RecipeSearch() {
   const shown = recipes.filter(
     (r, i) => (category === s.all || r.category === category) && matches(haystacks[i], query),
   );
+  const grid = useGridEntrance(shown.map((r) => r.name).join());
 
   return (
     <>
@@ -38,7 +40,7 @@ export default function RecipeSearch() {
 
       <section className="t-finder-results">
         {shown.length > 0 ? (
-          <div className="t-recipe-grid">
+          <div className="t-recipe-grid" ref={grid}>
             {shown.map((r) => (
               <RecipeCard key={r.name} recipe={r} />
             ))}

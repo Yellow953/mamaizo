@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import Motion from "@/components/Motion";
 import ProductCard from "@/components/ProductCard";
 import { tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
@@ -40,9 +41,9 @@ async function ProductDetail({ params }: { params: Params }) {
   const related = c.products.filter((r) => r.slug !== p.slug);
 
   return (
-    <>
+    <Motion>
       <article className="t-pdp">
-        <div className="t-pdp-media">
+        <div className="t-pdp-media" data-intro>
           <div className="t-tartan t-frame t-frame--flat">
             <div className="t-photo t-photo--portrait">
               <Image src={p.photo} alt={p.alt} fill priority sizes="(max-width: 700px) 90vw, 45vw" />
@@ -50,7 +51,7 @@ async function ProductDetail({ params }: { params: Params }) {
           </div>
         </div>
 
-        <div className="t-pdp-info">
+        <div className="t-pdp-info" data-intro-children>
           <p className="t-badge">{p.category}</p>
           <h1 className="t-display t-h1 t-h1--page">{p.name}</h1>
           <p className="t-lead">{p.description}</p>
@@ -82,13 +83,13 @@ async function ProductDetail({ params }: { params: Params }) {
       </article>
 
       <section className="t-section">
-        <h2 className="t-display t-h2 t-mb">{c.product.related}</h2>
-        <div className="t-grid">
+        <h2 className="t-display t-h2 t-mb" data-reveal>{c.product.related}</h2>
+        <div className="t-grid" data-stagger>
           {related.map((r) => (
             <ProductCard key={r.slug} product={r} />
           ))}
         </div>
       </section>
-    </>
+    </Motion>
   );
 }

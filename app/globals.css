@@ -816,11 +816,12 @@ body {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  /* translate, not transform, so the hover lift doesn't fight GSAP's entrance tweens */
+  transition: translate 0.2s ease;
 }
 
 .t-product:hover {
-  transform: translateY(-4px);
+  translate: 0 -4px;
 }
 
 .t-product-cat {
@@ -1011,7 +1012,7 @@ body {
   .t-product,
   .t-product:hover {
     transition: none;
-    transform: none;
+    translate: none;
   }
 }
 
@@ -1762,5 +1763,43 @@ body:has(.t-modal[open]) {
   .t-wa-fab::before,
   .t-wa-fab::after {
     display: none;
+  }
+}
+
+/* Animation (GSAP, components/Motion.tsx). The t-motion class is only set when motion is allowed,
+   so reduced-motion visitors see everything at once. Marked elements wait hidden until GSAP
+   reveals them; t-motion-unhide is a safety net in case the script never runs. */
+
+.t-motion-scope {
+  display: contents;
+}
+
+/* Dialogs are left out so their own open animation isn't overridden */
+.t-motion [data-motion] :is([data-intro], [data-intro-children] > *, [data-pop], [data-reveal], [data-stagger] > *, .t-product-grid > *, .t-recipe-grid > *):not(dialog) {
+  visibility: hidden;
+  animation: t-motion-unhide 0s 4s forwards;
+}
+
+@keyframes t-motion-unhide {
+  to {
+    visibility: visible;
+  }
+}
+
+.t-product .t-photo img {
+  transition: transform 0.4s ease;
+}
+
+.t-product:hover .t-photo img,
+.t-product:focus-visible .t-photo img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-product .t-photo img,
+  .t-product:hover .t-photo img,
+  .t-product:focus-visible .t-photo img {
+    transition: none;
+    transform: none;
   }
 }

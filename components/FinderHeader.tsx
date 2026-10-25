@@ -13,7 +13,7 @@ type Props = {
 export default function FinderHeader({ copy, query, onQuery, categories, category, onCategory, shown }: Props) {
   return (
     <header className="t-tartan t-finder">
-      <div className="t-finder-panel">
+      <div className="t-finder-panel" data-intro>
         <div className="t-finder-copy">
           <p className="t-badge">{copy.kicker}</p>
           <h1 className="t-display t-finder-title">{copy.title}</h1>
@@ -39,7 +39,7 @@ export default function FinderHeader({ copy, query, onQuery, categories, categor
           </div>
         </div>
 
-        <p className="t-finder-sticker" aria-live="polite">
+        <p className="t-finder-sticker" aria-live="polite" data-pop>
           <span className="t-display">{shown}</span>
           {copy.countLabel}
         </p>
