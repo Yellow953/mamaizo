@@ -18,6 +18,7 @@
   --t-dark: #1a1414;
   --t-dark-photo: #3a2e2b;
   --t-kicker: #ff8a98;
+  --t-wa: #25d366;
   --t-scrim: rgba(26, 20, 20, 0.85);
   --t-stripe-dark: rgba(26, 10, 10, 0.55);
   --t-stripe-mid: rgba(26, 10, 10, 0.35);
@@ -420,6 +421,18 @@ body {
   border-radius: 22px;
   background: var(--t-photo);
   text-decoration: none;
+  /* The card is a button that opens the recipe modal */
+  width: 100%;
+  border: 0;
+  font: inherit;
+  text-align: start;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.t-recipe:focus-visible {
+  outline: 3px solid var(--t-red);
+  outline-offset: 3px;
 }
 
 .t-recipe-time {
@@ -1124,5 +1137,630 @@ body {
 
   .t-stat p {
     font-size: 12px;
+  }
+}
+
+/* Search field and filter chips (recipes and shop) */
+
+.t-search-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 560px;
+  font-weight: 600;
+}
+
+.t-search-field svg {
+  position: absolute;
+  bottom: 15px;
+  right: 18px;
+  color: var(--t-muted);
+  pointer-events: none;
+}
+
+.t-search-field input {
+  font: inherit;
+  font-weight: 400;
+  min-height: 52px;
+  padding: 12px 52px 12px 18px;
+  border: 2px solid var(--t-ink);
+  border-radius: 999px;
+  background: var(--t-surface);
+  color: var(--t-ink);
+}
+
+.t-search-field input:focus-visible {
+  outline: 3px solid var(--t-red);
+  outline-offset: 2px;
+}
+
+.t-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.t-filters button {
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 2px solid var(--t-ink);
+  border-radius: 999px;
+  background: var(--t-surface);
+  color: var(--t-ink);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.t-filters button[aria-pressed="true"] {
+  border-color: var(--t-red);
+  background: var(--t-red);
+  color: var(--t-on-dark);
+}
+
+.t-filters button:focus-visible {
+  outline: 3px solid var(--t-red);
+  outline-offset: 3px;
+}
+
+.t-search-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  max-width: 560px;
+}
+
+.t-search-empty .t-btn {
+  margin-top: 12px;
+}
+
+/* Recipes and shop: compact header panel on tartan (FinderHeader), results grid */
+
+.t-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.t-finder {
+  margin: 8px var(--gutter) 0;
+  padding: clamp(12px, 1.6vw, 20px);
+  border-radius: 32px;
+}
+
+.t-finder-panel {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 48px;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 22px;
+  background: var(--t-bg);
+}
+
+.t-finder-copy {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.t-finder-copy .t-badge {
+  margin-bottom: 12px;
+  padding: 3px 14px;
+  font-size: 14px;
+}
+
+.t-finder-copy .t-muted {
+  margin: 10px 0 0;
+  max-width: 46ch;
+}
+
+.t-finder-title {
+  margin: 0;
+  font-size: clamp(36px, 4.2vw, 60px);
+  line-height: 1.1;
+}
+
+.t-finder-search {
+  flex: 1.2 1 380px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.t-finder-search .t-search-field {
+  max-width: none;
+}
+
+.t-finder-search .t-search-field svg {
+  bottom: 50%;
+  transform: translateY(50%);
+}
+
+/* Tilted count sticker, like the stat on the home hero */
+.t-finder-sticker {
+  position: absolute;
+  top: -18px;
+  left: clamp(20px, 3vw, 40px);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 82px;
+  height: 82px;
+  margin: 0;
+  border: 3px solid var(--t-bg);
+  border-radius: 50%;
+  background: var(--t-red);
+  color: var(--t-on-dark);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  transform: rotate(-10deg);
+  box-shadow: 0 8px 20px var(--t-stripe-mid);
+}
+
+.t-finder-sticker .t-display {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.t-filters--small button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 8px 6px 16px;
+  font-size: 15px;
+}
+
+.t-filter-count {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--t-photo);
+  color: var(--t-ink);
+  font-size: 13px;
+}
+
+.t-filters button[aria-pressed="true"] .t-filter-count {
+  background: var(--t-on-dark);
+  color: var(--t-red-ink);
+}
+
+.t-finder-results {
+  padding: 32px var(--gutter) 72px;
+}
+
+/* auto-fill keeps cards a sensible size when only a few recipes match */
+.t-recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 20px;
+}
+
+.t-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.t-recipe-grid .t-recipe-name {
+  font-size: 34px;
+}
+
+@media (max-width: 699px) {
+  .t-finder {
+    border-radius: 24px;
+  }
+
+  .t-finder-panel {
+    gap: 18px;
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .t-finder-copy {
+    /* leave room for the sticker */
+    padding-left: 64px;
+  }
+
+  .t-finder-sticker {
+    top: -14px;
+    left: 12px;
+    width: 66px;
+    height: 66px;
+    font-size: 12px;
+  }
+
+  .t-finder-sticker .t-display {
+    font-size: 26px;
+  }
+
+  /* Chips scroll sideways instead of wrapping into rows */
+  .t-filters--small {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -18px;
+    padding-inline: 18px;
+    scrollbar-width: none;
+  }
+
+  .t-filters--small button {
+    flex: none;
+  }
+
+  .t-finder-results {
+    padding: 24px var(--gutter) 56px;
+  }
+
+  .t-product-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .t-recipe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .t-recipe-grid .t-recipe {
+    padding: 14px;
+  }
+
+  .t-recipe-grid .t-recipe-name {
+    font-size: 24px;
+  }
+}
+
+/* Recipe card hint and recipe modal (RecipeCard) */
+
+.t-recipe-open {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--t-on-dark);
+  color: var(--t-ink);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.t-recipe:hover .t-recipe-open {
+  background: var(--t-red);
+  color: var(--t-on-dark);
+}
+
+body:has(.t-modal[open]) {
+  overflow: hidden;
+}
+
+.t-modal {
+  width: min(920px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: transparent;
+  color: var(--t-ink);
+  overflow: hidden;
+}
+
+.t-modal[open] {
+  animation: t-modal-in 0.25s ease-out;
+}
+
+.t-modal::backdrop {
+  background: var(--t-scrim);
+}
+
+.t-modal[open]::backdrop {
+  animation: t-modal-fade 0.25s ease-out;
+}
+
+.t-modal-inner {
+  position: relative;
+  display: flex;
+  max-height: calc(100dvh - 48px);
+  background: var(--t-bg);
+  border: 4px solid var(--t-ink);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.t-modal-media {
+  position: relative;
+  flex: 0 0 38%;
+  min-height: 480px;
+  background: var(--t-photo);
+}
+
+.t-modal-media img {
+  object-fit: cover;
+}
+
+.t-modal-body {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 36px 36px 32px;
+  overflow-y: auto;
+}
+
+.t-modal-close {
+  position: absolute;
+  z-index: 2;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--t-ink);
+  border-radius: 50%;
+  background: var(--t-surface);
+  color: var(--t-ink);
+  cursor: pointer;
+}
+
+.t-modal-close:hover {
+  background: var(--t-ink);
+  color: var(--t-bg);
+}
+
+.t-modal-close:focus-visible,
+.t-modal a:focus-visible {
+  outline: 3px solid var(--t-red);
+  outline-offset: 3px;
+}
+
+.t-modal-title {
+  margin: 0 0 12px;
+  font-size: clamp(40px, 5vw, 60px);
+  line-height: 1.05;
+}
+
+.t-modal .t-pdp-label {
+  margin: 24px 0 10px;
+}
+
+.t-modal .t-tags li {
+  padding: 4px 14px;
+  font-size: 15px;
+}
+
+.t-modal-watch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.t-modal-watch .t-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+.t-modal-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--t-photo);
+  font-size: 15px;
+  color: var(--t-muted);
+}
+
+.t-modal-foot p {
+  margin: 0;
+}
+
+@keyframes t-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+}
+
+@keyframes t-modal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 699px) {
+  .t-recipe-open {
+    margin-top: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  /* Bottom sheet on phones */
+  .t-modal {
+    width: 100%;
+    max-width: none;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .t-modal[open] {
+    animation-name: t-sheet-in;
+  }
+
+  .t-modal-inner {
+    flex-direction: column;
+    max-height: 92dvh;
+    border-width: 3px 0 0;
+    border-radius: 24px 24px 0 0;
+    overflow-y: auto;
+  }
+
+  .t-modal-media {
+    flex: none;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .t-modal-body {
+    padding: 22px max(var(--gutter), env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom))
+      max(var(--gutter), env(safe-area-inset-left));
+    overflow: visible;
+  }
+
+  .t-modal-close {
+    top: 12px;
+    left: 12px;
+  }
+
+  .t-modal-watch .t-btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+@keyframes t-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-modal[open],
+  .t-modal[open]::backdrop {
+    animation: none;
+  }
+}
+
+/* Floating WhatsApp button, bottom left on every page.
+   Pops in after load, sends out pulse rings, and the icon wiggles every few seconds. */
+
+.t-wa-fab {
+  position: fixed;
+  z-index: 30;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: max(20px, env(safe-area-inset-left));
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--t-wa);
+  color: var(--t-on-dark) !important;
+  box-shadow: 0 8px 24px var(--t-stripe-mid);
+  transition: transform 0.2s ease;
+  /* backwards, not both, so hover can still scale it after the pop-in */
+  animation: t-wa-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s backwards;
+}
+
+.t-wa-fab::before,
+.t-wa-fab::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--t-wa);
+  animation: t-wa-ring 2.4s ease-out 1.4s infinite;
+}
+
+.t-wa-fab::after {
+  animation-delay: 2.2s;
+}
+
+.t-wa-fab svg {
+  animation: t-wa-wiggle 4s ease-in-out 2s infinite;
+}
+
+.t-wa-fab:hover {
+  transform: scale(1.08);
+}
+
+.t-wa-fab:hover svg {
+  animation-play-state: paused;
+}
+
+.t-wa-fab:focus-visible {
+  outline: 3px solid var(--t-ink) !important;
+  outline-offset: 3px;
+}
+
+@keyframes t-wa-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes t-wa-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Short shake at the start of each cycle, then rest */
+@keyframes t-wa-wiggle {
+  0%,
+  20%,
+  100% {
+    transform: rotate(0);
+  }
+  4% {
+    transform: rotate(-16deg);
+  }
+  8% {
+    transform: rotate(14deg);
+  }
+  12% {
+    transform: rotate(-10deg);
+  }
+  16% {
+    transform: rotate(6deg);
+  }
+}
+
+@media (max-width: 699px) {
+  .t-wa-fab {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    left: max(16px, env(safe-area-inset-left));
+    width: 54px;
+    height: 54px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-wa-fab,
+  .t-wa-fab:hover,
+  .t-wa-fab svg {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .t-wa-fab::before,
+  .t-wa-fab::after {
+    display: none;
   }
 }

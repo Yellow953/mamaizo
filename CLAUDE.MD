@@ -42,6 +42,7 @@ Website for **MamaIzo** (Instagram: @mamaizocooks), who sells stainless steel co
 - Set the WhatsApp number in `lib/content.ts` (`WHATSAPP_URL`, format `https://wa.me/961XXXXXXXX`) and the `[رقم الواتساب]` contact value
 - Replace bracketed placeholder copy in `lib/content.ts` (product names, features) with the client's real text
 - Add the real product list and photos (no prices)
+- Set each recipe's `instagram` reel link in `lib/content.ts` (cards open the profile until then) and its `tiktok` link (the button is hidden when empty)
 - Test on a mid-range phone
 
 ## Working agreement

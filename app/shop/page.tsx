@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProductCard from "@/components/ProductCard";
+import ShopFilter from "@/components/ShopFilter";
 import { tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
 
@@ -11,19 +11,7 @@ export const metadata: Metadata = {
 export default function Shop() {
   return (
     <main>
-      <header className="t-page-head">
-        <p className="t-badge">{c.shop.kicker}</p>
-        <h1 className="t-display t-h1 t-h1--page">{c.shop.title}</h1>
-        <p className="t-lead">{c.shop.body}</p>
-      </header>
-
-      <section className="t-section t-section--flush">
-        <div className="t-grid">
-          {c.products.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
-        </div>
-      </section>
+      <ShopFilter />
 
       <section className="t-tartan t-session">
         <div className="t-session-inner">

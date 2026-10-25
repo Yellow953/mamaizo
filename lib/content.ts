@@ -94,8 +94,19 @@ export const tartan = {
     meta: { title: "المتجر · ماما إيزو", description: "طناجر ومشاوي وأطقم. اطلبي عالواتساب أو احجزي جلسة طبخ مجانية." },
     kicker: "المتجر",
     title: "طناجر بتغيّر طريقة طبخك.",
-    body: "شوفي الطناجر واختاري اللي بيناسبك. للطلب أو لأي سؤال، بعتيلي عالواتساب.",
+    body: "اختاري اللي بيناسبك، وللطلب أو لأي سؤال بعتيلي عالواتساب.",
     all: "الكل",
+    search: "فتّشي عن طنجرة",
+    placeholder: "مشاوي، رز، طقم…",
+    // Under the number on the count sticker
+    countLabel: "منتج",
+    empty: {
+      title: "ما لقيت شي بهالاسم.",
+      body: "بعتيلي شو عم تفتّشي عليه، وبقلّك إذا عندي.",
+      cta: "إسأليني عالواتساب",
+      // {query} is replaced with what she searched for
+      message: "مرحبا ماما إيزو، عندك {query}؟",
+    },
     help: {
       title: "مش عارفة شو تختاري؟",
       body: "احجزي جلسة طبخ مجانية ومنجرّب الطناجر سوا بمطبخك.",
@@ -139,14 +150,96 @@ export const tartan = {
       topicLine: "بخصوص",
     },
   },
+  // Shared by the home page and /recipes. A card opens a modal with the details and the video links.
+  // instagram: https://www.instagram.com/reel/XXXX/, tiktok: https://www.tiktok.com/@mamaizo/video/XXXX
+  // Leave one empty and its button is hidden. TODO: the Instagram reel links (the button opens the profile until then).
+  // TODO: confirm each description and ingredient list with the client.
+  // keywords are extra search terms: other spellings, English names. Ingredients are searched too.
   recipes: {
     title: "طبخات سريعة",
+    more: "كل الوصفات",
+    open: "شوفي الوصفة",
+    modal: {
+      close: "سكّري",
+      ingredients: "المكوّنات الأساسية",
+      method: "الطريقة كاملة خطوة بخطوة بالفيديو.",
+      instagram: "شوفي الريل عالإنستغرام",
+      tiktok: "شوفيها عالتيك توك",
+      ask: "عندك سؤال؟ اسأليني",
+      // {name} is replaced with the recipe name
+      message: "مرحبا ماما إيزو، عندي سؤال عن وصفة {name}",
+      pots: "طبختها بطناجر ماما إيزو، بطنجرة وحدة وبلا زيت.",
+      potsCta: "شوفي الطناجر ←",
+    },
     items: [
-      { name: "لوبية بالرز", time: "6 دقايق", photo: "/images/recipe-loubyeh.jpg" },
-      { name: "فوكاشيا", time: "أسرع وأسهل", photo: "/images/recipe-focaccia.jpg" },
-      { name: "سوشي كيك", time: "من حواضر البيت", photo: "/images/recipe-sushi.jpg" },
-      { name: "مغربية", time: "مش نهار كامل", photo: "/images/recipe-moghrabieh.jpg" },
+      {
+        name: "لوبية بالرز",
+        time: "6 دقايق",
+        category: "طبخات",
+        description: "طبخة البيت اللي الكل بيحبّها، جاهزة بـ6 دقايق بطنجرة وحدة.",
+        ingredients: ["لوبية", "رز", "لحمة", "بندورة", "بصل"],
+        keywords: ["لوبيا", "فاصوليا", "green beans"],
+        photo: "/images/recipe-loubyeh.jpg",
+        instagram: "",
+        tiktok: "",
+      },
+      {
+        name: "فوكاشيا",
+        time: "أسرع وأسهل",
+        category: "معجنات",
+        description: "فوكاشيا طريّة من جوّا ومقرمشة من برّا، أسرع وأسهل من ما بتتوقعي.",
+        ingredients: ["طحين", "خميرة", "زيت زيتون", "بندورة كرزية", "بصل أحمر"],
+        keywords: ["خبز", "عجين", "focaccia", "bread"],
+        photo: "/images/recipe-focaccia.jpg",
+        instagram: "",
+        tiktok: "",
+      },
+      {
+        name: "سوشي كيك",
+        time: "من حواضر البيت",
+        category: "أطباق باردة",
+        description: "سوشي بشكل قالب كيك، من حواضر البيت وبلا لفّ.",
+        ingredients: ["رز سوشي", "سلمون", "أفوكادو", "خيار"],
+        keywords: ["سوشي", "رز", "sushi", "cake"],
+        photo: "/images/recipe-sushi.jpg",
+        instagram: "",
+        tiktok: "",
+      },
+      {
+        name: "مغربية",
+        time: "مش نهار كامل",
+        category: "طبخات",
+        description: "مين قال المغربية بدها نهار كامل؟ دجاج ومغربية وحمص وبصل، كلّن بطنجرة وحدة بدل خمس طناجر.",
+        ingredients: ["دجاج", "مغربية", "حمص", "بصل"],
+        keywords: ["مغربيه", "moghrabieh"],
+        photo: "/images/recipe-moghrabieh.jpg",
+        instagram: "",
+        tiktok: "https://www.tiktok.com/@mamaizo/video/7683210392511810823",
+      },
     ],
+  },
+  recipesPage: {
+    meta: { title: "الوصفات · ماما إيزو", description: "وصفات سريعة وصحّية بطنجرة وحدة. فتّشي عن طبخة وشوفي الريل عالإنستغرام." },
+    kicker: "الوصفات",
+    title: "شو بدّك تطبخي اليوم؟",
+    body: "فتّشي بشي عندك بالبرّاد، وكبسي عالوصفة لتشوفي الريل.",
+    search: "فتّشي عن وصفة",
+    placeholder: "رز، دجاج، فوكاشيا…",
+    all: "الكل",
+    // Under the number on the count sticker
+    countLabel: "وصفة",
+    empty: {
+      title: "ما لقيت هالوصفة.",
+      body: "بعتيلي شو بدّك تطبخي، ويمكن تكون الريل الجاي.",
+      cta: "اطلبي وصفة عالواتساب",
+      // {query} is replaced with what she searched for
+      message: "مرحبا ماما إيزو، في وصفة لـ {query}؟",
+    },
+    more: {
+      title: "في وصفات أكتر عالإنستغرام",
+      body: "كل يوم في طبخة جديدة على @mamaizocooks.",
+      cta: "تابعيني عالإنستغرام",
+    },
   },
   session: {
     title: "جلسة طبخ",
@@ -166,6 +259,11 @@ export const tartan = {
     photoAlt: "ماما إيزو بالجنينة",
   },
   footer: { instagram: "Instagram", tiktok: "TikTok", whatsapp: "WhatsApp" },
+  // Floating button on every page
+  whatsappFab: {
+    label: "بعتيلي عالواتساب",
+    message: "مرحبا ماما إيزو،",
+  },
   notFound: {
     title: "هالصفحة مش موجودة.",
     body: "يمكن الرابط غلط. رجعي عالمتجر وشوفي الطناجر.",

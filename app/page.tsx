@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { INSTAGRAM_URL, tartan as c } from "@/lib/content";
+import RecipeCard from "@/components/RecipeCard";
+import { tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
@@ -88,14 +89,15 @@ export default function Tartan() {
       </section>
 
       <section id="recipes" className="t-section t-section--flush">
-        <h2 className="t-display t-h2 t-mb">{c.recipes.title}</h2>
+        <div className="t-section-head">
+          <h2 className="t-display t-h2">{c.recipes.title}</h2>
+          <Link className="t-chip" href="/recipes">
+            {c.recipes.more} ←
+          </Link>
+        </div>
         <div className="t-grid t-grid--small">
-          {c.recipes.items.map((r) => (
-            <a key={r.name} className="t-recipe" href={INSTAGRAM_URL} {...external}>
-              <span className="t-recipe-time">{r.time}</span>
-              <Image className="t-recipe-img" src={r.photo} alt="" fill sizes="(max-width: 700px) 46vw, 25vw" />
-              <span className="t-display t-recipe-name">{r.name}</span>
-            </a>
+          {c.recipes.items.slice(0, 4).map((r) => (
+            <RecipeCard key={r.name} recipe={r} />
           ))}
         </div>
       </section>

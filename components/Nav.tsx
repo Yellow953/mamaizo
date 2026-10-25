@@ -9,7 +9,7 @@ import { external, waLink } from "@/lib/whatsapp";
 const links = [
   { href: "/", label: c.nav.home },
   { href: "/shop", label: c.nav.shop },
-  { href: "/#recipes", label: c.nav.recipes },
+  { href: "/recipes", label: c.nav.recipes },
   { href: "/#team", label: c.nav.team },
   { href: "/contact", label: c.nav.contact },
 ];
