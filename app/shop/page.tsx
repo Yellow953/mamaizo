@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProductCard from "@/components/design2/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import { tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
 

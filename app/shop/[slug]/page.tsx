@@ -3,28 +3,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import ProductCard from "@/components/design2/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import { tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
 
 const find = (slug: string) => c.products.find((p) => p.slug === slug);
 
-type Params = PageProps<"/design2/shop/[slug]">["params"];
+type Params = PageProps<"/shop/[slug]">["params"];
 
 export function generateStaticParams() {
   return c.products.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata(props: PageProps<"/design2/shop/[slug]">): Promise<Metadata> {
+export async function generateMetadata(props: PageProps<"/shop/[slug]">): Promise<Metadata> {
   const p = find((await props.params).slug);
   return p ? { title: `${p.name} · ${c.name}`, description: p.text } : {};
 }
 
-export default function Product(props: PageProps<"/design2/shop/[slug]">) {
+export default function Product(props: PageProps<"/shop/[slug]">) {
   return (
     <main>
       <div className="t-crumb">
-        <Link href="/design2/shop">{c.product.back}</Link>
+        <Link href="/shop">{c.product.back}</Link>
       </div>
       {/* Reading params inside Suspense keeps navigation to the page instant */}
       <Suspense fallback={<div className="t-pdp-fallback" />}>

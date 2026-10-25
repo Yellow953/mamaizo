@@ -7,11 +7,11 @@ import { tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
 
 const links = [
-  { href: "/design2", label: c.nav.home },
-  { href: "/design2/shop", label: c.nav.shop },
-  { href: "/design2#recipes", label: c.nav.recipes },
-  { href: "/design2#team", label: c.nav.team },
-  { href: "/design2/contact", label: c.nav.contact },
+  { href: "/", label: c.nav.home },
+  { href: "/shop", label: c.nav.shop },
+  { href: "/#recipes", label: c.nav.recipes },
+  { href: "/#team", label: c.nav.team },
+  { href: "/contact", label: c.nav.contact },
 ];
 
 export default function Nav() {
@@ -19,7 +19,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   // Shop stays highlighted on product pages too
   const isCurrent = (href: string) =>
-    href === "/design2" ? path === href : !href.includes("#") && path.startsWith(href);
+    href === "/" ? path === href : !href.includes("#") && path.startsWith(href);
 
   // Close the phone menu on Escape
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Nav() {
 
   return (
     <nav className="t-nav">
-      <Link className="t-logo" href="/design2" onClick={close}>
+      <Link className="t-logo" href="/" onClick={close}>
         {c.name}
       </Link>
       <div className="t-nav-links">

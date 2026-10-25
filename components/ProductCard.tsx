@@ -6,7 +6,7 @@ type Product = (typeof c.products)[number];
 
 export default function ProductCard({ product: p }: { product: Product }) {
   return (
-    <Link className="t-product" href={`/design2/shop/${p.slug}`}>
+    <Link className="t-product" href={`/shop/${p.slug}`}>
       <div className="t-photo t-photo--wide">
         <Image src={p.photo} alt={p.alt} fill sizes="(max-width: 700px) 92vw, 33vw" style={{ objectPosition: p.focus }} />
       </div>

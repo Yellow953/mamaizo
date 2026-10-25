@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import ContactForm from "@/components/design2/ContactForm";
+import ContactForm from "@/components/ContactForm";
 import { INSTAGRAM_URL, TIKTOK_URL, tartan as c } from "@/lib/content";
 import { external, waLink } from "@/lib/whatsapp";
 

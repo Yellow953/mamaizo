@@ -3,107 +3,9 @@
 // TODO: set the real number, format https://wa.me/961XXXXXXXX
 export const WHATSAPP_URL = "https://wa.me/961XXXXXXXX";
 export const INSTAGRAM_URL = "https://www.instagram.com/mamaizocooks/";
-
-export const meta = {
-  title: "MamaIzo · Stainless steel cookware",
-  description:
-    "Stainless steel pots made for slow cooking and family recipes. Order from MamaIzo on WhatsApp.",
-};
-
-export const brand = {
-  name: "MamaIzo",
-  handle: "@mamaizocooks",
-};
-
-export const nav = {
-  home: "MamaIzo home",
-  instagram: "Instagram",
-  order: "Order",
-};
-
-export type Callout = { title: string; text: string };
-
-export type SceneCopy = {
-  kicker: string;
-  name: string; // short label in the scene index
-  headline: string[];
-  body?: string;
-  callouts?: Callout[];
-  labels?: Callout[];
-  // Her photo, shown in the "meet her" scene
-  photo?: { src: string; alt: string; sticker: string };
-};
-
-export const scenes: SceneCopy[] = [
-  {
-    kicker: "Stainless steel cookware",
-    name: "Hello",
-    headline: ["MamaIzo"],
-    body: "Pots that hold the heat, hold up, and hold the family recipes. Scroll to take a closer look.",
-  },
-  {
-    kicker: "01 · Cook slow",
-    name: "Cook slow",
-    headline: ["Cook", "slow"],
-    body: "A heavy base spreads the heat evenly, so stews can simmer for hours without catching.",
-  },
-  {
-    kicker: "02 · Lift the lid",
-    name: "The lid",
-    headline: ["Lift the", "lid"],
-    callouts: [
-      { title: "Snug lid", text: "Keeps the steam in, so nothing dries out." },
-      { title: "Riveted handles", text: "Solid grip, even with a full pot." },
-      { title: "Pure steel", text: "No coating to chip or wear off." },
-    ],
-  },
-  {
-    kicker: "03 · The range",
-    name: "The range",
-    headline: ["The", "range"],
-    // Left to right, matching the pots on screen
-    labels: [
-      { title: "Stock pot", text: "Soups and stocks" },
-      { title: "Everyday pot", text: "Rice, stews, the lot" },
-      { title: "Casserole", text: "Bakes and braises" },
-    ],
-  },
-  {
-    kicker: "04 · Meet her",
-    name: "Meet her",
-    headline: ["Meet", "MamaIzo"],
-    body: "Hi, I'm MamaIzo. I help busy mums put healthy food on the table in less time: one pot, no oil, no stress.",
-    photo: {
-      // TODO: swap for a clean high-res portrait from the client
-      src: "/images/showroom/mamaizo.jpg",
-      alt: "MamaIzo in her garden, holding a pomegranate",
-      sticker: "AMC Queen 2023–2025",
-    },
-  },
-  {
-    kicker: "05 · Order",
-    name: "Order",
-    headline: ["Yours", "next"],
-    body: "Message us on WhatsApp to order, or to ask about sizes.",
-  },
-];
-
-export const cta = {
-  primary: "Order on WhatsApp",
-  secondary: "See it cooking on Instagram",
-};
-
-export const ui = {
-  progress: "Scroll progress",
-  scenes: "Jump to a scene",
-  of: "/",
-  // Text that runs round the spinning badge in the hero
-  badge: "Stainless steel · Made to last · Made for family ·",
-};
-
-// Second design direction ("Tartan"), Arabic first, served at /design2.
 export const TIKTOK_URL = "https://www.tiktok.com/@mamaizo";
 
+// Arabic first, RTL ("Tartan" design)
 export const tartan = {
   meta: {
     title: "ماما إيزو · طبخ صحّي بدقايق",
@@ -127,7 +29,7 @@ export const tartan = {
     body: "بطنجرة وحدة، بلا زيت، وبلا تعب. بساعد الإمّهات المشغولين يحطّوا أكل طيّب وصحّي عالسفرة بوقت أقل.",
     primary: "احجزي جلسة طبخ مجانية",
     secondary: "شوفي الطناجر",
-    photo: "/images/design2/hero.jpg",
+    photo: "/images/hero.jpg",
     photoAlt: "ماما إيزو حاملة طنجرة ستانلس ستيل",
     stat: "80%",
     statLabel: "وقت أقل",
@@ -159,7 +61,7 @@ export const tartan = {
       description: "الطنجرة اللي ما بتفلّ عن الغاز. بتطبخي فيها الرز واليخنة والخضرة سوا، بلا زيت وبمَي قليلة، وبتحافظ عالطعمة والقيمة الغذائية.",
       cooks: ["رز بالدجاج", "يخنة خضرة", "لوبية بالرز"],
       features: ["[ميزة من الزبونة]", "[الحجم أو السعة]", "[نوع الغاز أو البلاطة]"],
-      photo: "/images/design2/pot-everyday.jpg",
+      photo: "/images/pot-everyday.jpg",
       alt: "ماما إيزو مع طبخة جاهزة",
       focus: "50% 72%",
     },
@@ -171,7 +73,7 @@ export const tartan = {
       description: "مشاوي صحية جوّا البيت. الدهن ما بينزل عالفحم، فما في دخّان، واللحمة بتضل طريّة وزاكية.",
       cooks: ["مشاوي لحمة", "دجاج مشوي", "خضرة مشوية"],
       features: ["بلا فحم وبلا دخّان", "[الحجم]", "[ميزة من الزبونة]"],
-      photo: "/images/design2/pot-grill.jpg",
+      photo: "/images/pot-grill.jpg",
       alt: "مشاوي صحية عالـ Oval Grill",
       focus: "50% 88%",
     },
@@ -183,7 +85,7 @@ export const tartan = {
       description: "طقم كامل لبيت جديد أو لعروس: طناجر ومقالي لكل طبخة، من الترويقة للعشا.",
       cooks: ["كل طبخات البيت", "قلي بلا زيت", "حلويات"],
       features: ["[شو في بالطقم]", "[عدد القطع]", "[ميزة من الزبونة]"],
-      photo: "/images/design2/pot-set.jpg",
+      photo: "/images/pot-set.jpg",
       alt: "طناجر ومقالي من الطقم",
       focus: "50% 55%",
     },
@@ -240,10 +142,10 @@ export const tartan = {
   recipes: {
     title: "طبخات سريعة",
     items: [
-      { name: "لوبية بالرز", time: "6 دقايق", photo: "/images/design2/recipe-loubyeh.jpg" },
-      { name: "فوكاشيا", time: "أسرع وأسهل", photo: "/images/design2/recipe-focaccia.jpg" },
-      { name: "سوشي كيك", time: "من حواضر البيت", photo: "/images/design2/recipe-sushi.jpg" },
-      { name: "مغربية", time: "مش نهار كامل", photo: "/images/design2/recipe-moghrabieh.jpg" },
+      { name: "لوبية بالرز", time: "6 دقايق", photo: "/images/recipe-loubyeh.jpg" },
+      { name: "فوكاشيا", time: "أسرع وأسهل", photo: "/images/recipe-focaccia.jpg" },
+      { name: "سوشي كيك", time: "من حواضر البيت", photo: "/images/recipe-sushi.jpg" },
+      { name: "مغربية", time: "مش نهار كامل", photo: "/images/recipe-moghrabieh.jpg" },
     ],
   },
   session: {
@@ -260,7 +162,7 @@ export const tartan = {
     body: "من ١٣ سنة أخدت فرصة صغيرة غيّرتلي حياتي. اليوم دوري إفتح نفس الباب لستّات بدّن يبنوا شي لإلن.",
     cta: "إسأليني عن الفريق",
     message: "مرحبا ماما إيزو، بدّي إعرف أكتر عن الانضمام لفريقك",
-    photo: "/images/design2/team.jpg",
+    photo: "/images/team.jpg",
     photoAlt: "ماما إيزو بالجنينة",
   },
   footer: { instagram: "Instagram", tiktok: "TikTok", whatsapp: "WhatsApp" },
@@ -269,10 +171,4 @@ export const tartan = {
     body: "يمكن الرابط غلط. رجعي عالمتجر وشوفي الطناجر.",
     cta: "رجعة عالمتجر",
   },
-};
-
-export const notFound = {
-  title: "Page not found",
-  body: "This page doesn't exist. Head back to the kitchen.",
-  home: "Back to home",
 };

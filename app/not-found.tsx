@@ -1,12 +1,16 @@
 import Link from "next/link";
-import { notFound as c } from "@/lib/content";
+import { tartan as c } from "@/lib/content";
 
-export default function NotFound() {
+export default function Design2NotFound() {
   return (
-    <main className="not-found">
-      <h1>{c.title}</h1>
-      <p>{c.body}</p>
-      <Link href="/">{c.home}</Link>
+    <main className="t-page-head t-404">
+      <h1 className="t-display t-h1 t-h1--page">{c.notFound.title}</h1>
+      <p className="t-lead">{c.notFound.body}</p>
+      <div className="t-actions">
+        <Link className="t-btn t-btn--red" href="/shop">
+          {c.notFound.cta}
+        </Link>
+      </div>
     </main>
   );
 }
